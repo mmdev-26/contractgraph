@@ -15,7 +15,7 @@ python3 app.py analyze example.json --output report.json
 python3 app.py serve --port 8080
 ```
 
-Open http://127.0.0.1:8080. Load the included scenario, edit or import JSON, run the analysis, inspect tables and export a report. The workbench only binds to loopback and processes inputs in the local Python process. No external API calls, telemetry, cookies or persistence.
+Open http://127.0.0.1:8080. Load the included scenario, edit or import JSON, run the analysis, inspect tables and export a report. When run locally, the workbench binds to loopback and processes inputs in your Python process. The hosted demo instead sends your scenario to the AGENCIA server; it does not save submitted input. Do not submit personal, confidential or production data to a public demo. No external AI API calls, telemetry, cookies or input persistence. Maximum request size is 512 KB.
 
 ## Tests
 
@@ -46,3 +46,9 @@ MIT — see LICENSE.
 See [ARCHITECTURE.md](ARCHITECTURE.md) for the algorithm, guarantees, limitations and roadmap. [example-report.json](example-report.json) is generated from the included fixture.
 
 ![Workbench preview](preview.png)
+
+## Live demonstration
+
+https://agencia.sk/labs/contractgraph/
+
+The hosted demo uses two bounded concurrent analysis slots, child-process isolation, CPU/memory deadlines and reverse-proxy rate limits. It is a demonstration service, not a private data-processing environment. The hosted demo runs on Linux.

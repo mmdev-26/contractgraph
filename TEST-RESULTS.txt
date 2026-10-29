@@ -11,16 +11,19 @@ test_transitive_chain (test_engine.Tests.test_transitive_chain) ... ok
 test_cross_origin_rejected (test_server.ServerTests.test_cross_origin_rejected) ... /opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/tempfile.py:484: ResourceWarning: Implicitly cleaning up <HTTPError 403: 'Forbidden'>
   _warnings.warn(self.warn_message, ResourceWarning)
 ok
-test_no_cors_or_cache (test_server.ServerTests.test_no_cors_or_cache) ... ok
-test_real_example (test_server.ServerTests.test_real_example) ... ok
-test_reject_nonfinite (test_server.ServerTests.test_reject_nonfinite) ... /opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/tempfile.py:484: ResourceWarning: Implicitly cleaning up <HTTPError 400: 'Bad Request'>
+test_disclosure (test_server.ServerTests.test_disclosure) ... ok
+test_invalid_structure (test_server.ServerTests.test_invalid_structure) ... /opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/tempfile.py:484: ResourceWarning: Implicitly cleaning up <HTTPError 400: 'Bad Request'>
   _warnings.warn(self.warn_message, ResourceWarning)
 ok
+test_no_cors_or_cache (test_server.ServerTests.test_no_cors_or_cache) ... ok
+test_public_origin_accepted (test_server.ServerTests.test_public_origin_accepted) ... ok
+test_real_example (test_server.ServerTests.test_real_example) ... ok
+test_reject_nonfinite (test_server.ServerTests.test_reject_nonfinite) ... ok
 test_unknown_path (test_server.ServerTests.test_unknown_path) ... /opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/tempfile.py:484: ResourceWarning: Implicitly cleaning up <HTTPError 404: 'Not Found'>
   _warnings.warn(self.warn_message, ResourceWarning)
 ok
 
 ----------------------------------------------------------------------
-Ran 15 tests in 0.087s
+Ran 18 tests in 0.228s
 
 OK

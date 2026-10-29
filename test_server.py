@@ -4,7 +4,7 @@ class ServerTests(unittest.TestCase):
  @classmethod
  def setUpClass(cls):
   s=socket.socket();s.bind(('127.0.0.1',0));cls.port=s.getsockname()[1];s.close();cls.url=f'http://127.0.0.1:{cls.port}'
-  cls.process=subprocess.Popen([sys.executable,'app.py','serve','--port',str(cls.port)],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
+  cls.process=subprocess.Popen([sys.executable,'app.py','serve','--port',str(cls.port),'--isolated','--public-origin','https://agencia.sk'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
   for i in range(50):
    try:urllib.request.urlopen(cls.url,timeout=.2).close();break
    except (OSError,urllib.error.URLError):time.sleep(.03)
@@ -25,3 +25,11 @@ class ServerTests(unittest.TestCase):
   self.assertEqual(e.exception.code,404)
  def test_no_cors_or_cache(self):
   with urllib.request.urlopen(self.url) as r:self.assertEqual(r.headers['Cache-Control'],'no-store');self.assertIsNone(r.headers.get('Access-Control-Allow-Origin'))
+
+ def test_public_origin_accepted(self):
+  with self.post(Path('example.json').read_bytes(),{'Origin':'https://agencia.sk'}) as r:self.assertIn('summary',json.load(r))
+ def test_disclosure(self):
+  with urllib.request.urlopen(self.url) as r:self.assertIn('Public demo: input is sent to our server',r.read().decode())
+ def test_invalid_structure(self):
+  with self.assertRaises(urllib.error.HTTPError) as e:self.post(b'null')
+  self.assertEqual(e.exception.code,400)
