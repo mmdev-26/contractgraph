@@ -1,0 +1,49 @@
+{
+  "product": "ContractGraph",
+  "version": "0.1.0",
+  "summary": {
+    "breaking": 2,
+    "manualReview": 0,
+    "impactedConsumers": 2,
+    "operationsCompared": 1
+  },
+  "findings": [
+    {
+      "code": "required_incompatible",
+      "path": "POST /invoices/request/application/json/amount",
+      "detail": "New required request field",
+      "severity": "breaking"
+    },
+    {
+      "code": "enum_incompatible",
+      "path": "POST /invoices/response/200/application/json/state",
+      "detail": "Allowed values changed for response",
+      "severity": "breaking"
+    }
+  ],
+  "impact": [
+    {
+      "consumer": "billing-sdk",
+      "chain": [
+        "billing-sdk"
+      ],
+      "direct": true
+    },
+    {
+      "consumer": "checkout",
+      "chain": [
+        "billing-sdk",
+        "checkout"
+      ],
+      "direct": false
+    }
+  ],
+  "provenance": {
+    "inputSha256": "dfc84c0e8728ab167d6f0f10596bd30645ae57a31d8cfc2e2e39ba182fede14e"
+  },
+  "limitations": [
+    "Conservative schema checks, not a complete OpenAPI compatibility proof.",
+    "Only local schema references; composition, recursion and some constraints require manual review.",
+    "Consumer impact follows declared dependencies, not observed runtime traffic."
+  ]
+}

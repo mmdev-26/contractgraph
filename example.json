@@ -1,0 +1,170 @@
+{
+  "before": {
+    "openapi": "3.0.3",
+    "info": {
+      "title": "Billing",
+      "version": "1"
+    },
+    "paths": {
+      "/invoices": {
+        "post": {
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "state"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "state": {
+                      "type": "string",
+                      "enum": [
+                        "open",
+                        "paid"
+                      ]
+                    },
+                    "amount": {
+                      "type": "number",
+                      "minimum": 0
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "state"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "state": {
+                        "type": "string",
+                        "enum": [
+                          "open",
+                          "paid"
+                        ]
+                      },
+                      "amount": {
+                        "type": "number",
+                        "minimum": 0
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "after": {
+    "openapi": "3.0.3",
+    "info": {
+      "title": "Billing",
+      "version": "2"
+    },
+    "paths": {
+      "/invoices": {
+        "post": {
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "state",
+                    "amount"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "state": {
+                      "type": "string",
+                      "enum": [
+                        "open",
+                        "paid"
+                      ]
+                    },
+                    "amount": {
+                      "type": "number",
+                      "minimum": 0
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "state"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "state": {
+                        "type": "string",
+                        "enum": [
+                          "open",
+                          "paid",
+                          "cancelled"
+                        ]
+                      },
+                      "amount": {
+                        "type": "number",
+                        "minimum": 0
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "consumers": [
+    {
+      "id": "billing-sdk",
+      "operations": [
+        "POST /invoices"
+      ]
+    },
+    {
+      "id": "checkout",
+      "dependsOn": [
+        "billing-sdk"
+      ]
+    },
+    {
+      "id": "admin",
+      "operations": [
+        "GET /health"
+      ]
+    }
+  ]
+}

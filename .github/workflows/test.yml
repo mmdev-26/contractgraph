@@ -1,0 +1,14 @@
+name: Python checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile and run tests
+        run: |
+          python3 -m compileall -q .
+          python3 -m unittest discover -v
+          python3 app.py analyze example.json --output /tmp/example-report.json
